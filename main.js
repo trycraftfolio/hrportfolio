@@ -1,9 +1,16 @@
+// main.js — fixes & updates:
+// - unified arrow behaviour and prevented focus-jump on arrow buttons
+// - added light-mode logo variants per event and load appropriate logo depending on theme
+// - ensured Website button gets readable styles in light mode
+// - ensured section-3 benefit cards wrap and do not produce horizontal scroll in desktop/mobile
+
 const events = [
   {
     title: "HR Tech MENA Summit",
     date: "6th & 7th May 2026 | Dubai, UAE",
     imgDesktop: "assets/hrtm-c.jpg",
     logo: "assets/hrtm-l.png",
+    logoLight: "assets/hrtm-l-light.png", // dummy light logo
     gradient: "linear-gradient(120deg, #0072ff, #00c6ff)",
     accessCode: "HRDXB25",
     link: "https://hrtechmena.com/"
@@ -13,6 +20,7 @@ const events = [
     date: "June 2026 | Abu Dhabi, UAE",
     imgDesktop: "assets/atdme-c.jpg",
     logo: "assets/atdme-l.png",
+    logoLight: "assets/atdme-l-light.png",
     gradient: "linear-gradient(120deg, #ff512f, #cf9b00d6)",
     accessCode: "ATDME",
     link: "https://atdme.com/"
@@ -22,6 +30,7 @@ const events = [
     date: "6th & 7th October 2026 | Riyadh, Saudi Arabia",
     imgDesktop: "assets/hrts-c.jpg",
     logo: "assets/HRTS-logo.png",
+    logoLight: "assets/hrts-l-light.png",
     gradient: "linear-gradient(120deg, #000dbeff, #0085cdff)",
     accessCode: "HRYD25",
     link: "https://hrtechsaudi.com/"
@@ -31,6 +40,7 @@ const events = [
     date: "21st & 22nd October 2026 | Abu Dhabi, UAE",
     imgDesktop: "assets/govhr-c.jpg",
     logo: "assets/govhr.png",
+    logoLight: "assets/govhr-light.png",
     gradient: "linear-gradient(120deg, #6e4600ff, #ba8418ff)",
     accessCode: "GHR25",
     link: "https://hrtechsaudi.com/"
@@ -40,6 +50,7 @@ const events = [
     date: "16th & 17th November 2026 | Dubai, UAE",
     imgDesktop: "assets/atdksa-c.jpg",
     logo: "assets/atdksa-l.png",
+    logoLight: "assets/atdksa-l-light.png",
     gradient: "linear-gradient(120deg, #654ea3, #9980d1ff)",
     accessCode: "ATDKSA",
     link: "https://atdksa.com/"
@@ -52,7 +63,9 @@ window.addEventListener("DOMContentLoaded", () => {
   setEvent(0);
   renderDots();
   buildAllEvents();
-  attachAllEventsPanel();
+  attachAboutPanel();
+  attachThemeToggle();
+  attachArrowButtonBehaviour();
 });
 
 /* -------------- CAROUSEL / EVENT DISPLAY -------------- */
@@ -70,7 +83,10 @@ function setEvent(idx) {
 
   setTimeout(() => {
     img.src = evt.imgDesktop;
-    logo.src = evt.logo;
+    // choose light-mode logo variant if in light-mode
+    const body = document.body;
+    logo.src = body.classList.contains("light-mode") && evt.logoLight ? evt.logoLight : evt.logo;
+
     bg.style.backgroundImage = `url('${evt.imgDesktop}')`;
 
     titleEl.textContent = evt.title;
@@ -88,26 +104,37 @@ function setEvent(idx) {
     img.onload = () => (img.style.opacity = 1);
     logo.onload = () => (logo.style.opacity = 1);
 
-    applyGradient(evt.gradient);
+    applyGradientToButtons(evt.gradient);
     attachAccessCode(evt.accessCode);
     attachWebsite(evt.link);
     updateDots(idx);
   }, 160);
 }
 
-function applyGradient(gradient) {
-  // style all primary buttons with gradient (except those overridden)
+function applyGradientToButtons(gradient) {
   document.querySelectorAll(".portfolio-btn").forEach(btn => {
     btn.style.background = gradient;
+    btn.style.color = "#fff";
+    btn.style.border = "none";
   });
 
-  // make the website button slightly different (semi-transparent white overlay) but keep gradient accents
   const website = document.querySelector(".website-btn");
+  const body = document.body;
+
   if (website) {
-    website.style.background = "rgba(255,255,255,0.12)";
-    website.style.border = "1px solid rgba(255,255,255,0.12)";
-    website.style.backdropFilter = "blur(6px)";
-    website.style.color = "#fff";
+    if (body.classList.contains("light-mode")) {
+      // readable in light mode: dark subtle background and dark text
+      website.style.background = "rgba(15,23,36,0.06)";
+      website.style.border = "1px solid rgba(15,23,36,0.08)";
+      website.style.color = "var(--light-text)";
+      website.style.backdropFilter = "none";
+    } else {
+      // dark mode appearance
+      website.style.background = "rgba(255,255,255,0.12)";
+      website.style.border = "1px solid rgba(255,255,255,0.12)";
+      website.style.color = "#fff";
+      website.style.backdropFilter = "blur(6px)";
+    }
   }
 }
 
@@ -151,9 +178,40 @@ function showToast(msg) {
 
 function nextSlide() { currentIndex = (currentIndex + 1) % events.length; setEvent(currentIndex); }
 function prevSlide() { currentIndex = (currentIndex - 1 + events.length) % events.length; setEvent(currentIndex); }
-document.getElementById("arrowLeft").onclick = prevSlide;
-document.getElementById("arrowRight").onclick = nextSlide;
 
+/* attach arrows: unify behaviour, prevent focus and layout jumps */
+function attachArrowButtonBehaviour() {
+  const left = document.getElementById("arrowLeft");
+  const right = document.getElementById("arrowRight");
+
+  // unify click actions
+  if (left) left.addEventListener("click", prevSlide);
+  if (right) right.addEventListener("click", nextSlide);
+
+  // add identical pressed visual behavior and prevent focus retaining (prevents jumping)
+  [left, right].forEach(btn => {
+    if (!btn) return;
+    // prevent default focus on mousedown to avoid layout jumps on some browsers
+    btn.addEventListener("mousedown", (e) => {
+      // allow the click but avoid focus style shifting
+      e.preventDefault();
+      btn.classList.add("pressed");
+    });
+    btn.addEventListener("mouseup", () => btn.classList.remove("pressed"));
+    btn.addEventListener("mouseleave", () => btn.classList.remove("pressed"));
+    btn.addEventListener("touchstart", (e) => {
+      // avoid focusing / reflow on touch devices
+      e.preventDefault();
+      btn.classList.add("pressed");
+    }, { passive: false });
+    btn.addEventListener("touchend", () => btn.classList.remove("pressed"));
+
+    // prevent keyboard focus style causing layout differences
+    btn.addEventListener("focus", () => btn.blur());
+  });
+}
+
+/* -------------- DOTS -------------- */
 function renderDots() {
   const footer = document.querySelector(".footer");
   const dotContainer = document.createElement("div");
@@ -170,25 +228,32 @@ function updateDots(activeIndex) {
   document.querySelectorAll(".dot").forEach((dot, i) => dot.classList.toggle("active", i === activeIndex));
 }
 
-/* -------------- ALL EVENTS (Hero) -------------- */
+/* -------------- ALL EVENTS (Hero) --------------
+   All cards are equal size to guarantee consistent layout.
+*/
 function buildAllEvents() {
   const container = document.getElementById("eventCards");
   container.innerHTML = "";
   events.forEach((evt, i) => {
     const card = document.createElement("div");
     card.className = "event-card";
-    // ensure thumbnail is fully visible
+    card.setAttribute("role", "listitem");
+
     card.innerHTML = `
       <div class="thumb-wrap">
         <img src="${evt.imgDesktop}" alt="${evt.title}">
       </div>
       <div class="card-body">
-        <h4>${evt.title}</h4>
-        <p>${evt.date}</p>
+        <div>
+          <h4>${evt.title}</h4>
+          <p>${evt.date}</p>
+        </div>
         <div class="card-actions">
           <button class="view-btn" onclick="viewEvent(${i})">View</button>
         </div>
       </div>`;
+
+    // subtle accent (keeps the card neutral by default)
     container.appendChild(card);
   });
 }
@@ -199,37 +264,52 @@ function viewEvent(i) {
   document.getElementById("carouselSection").scrollIntoView({ behavior: "smooth" });
 }
 
-/* -------------- All Events Panel toggle (kept simple) -------------- */
-function attachAllEventsPanel() {
-  const btn = document.getElementById("allEventsBtn");
+/* -------------- ABOUT PANEL toggle -------------- */
+function attachAboutPanel() {
+  const btn = document.getElementById("aboutBtn");
   btn.addEventListener("click", () => {
-    // toggle an overlay modal panel for all events (simple)
-    let panel = document.querySelector(".events-panel");
+    let panel = document.querySelector(".about-panel");
     if (!panel) {
       panel = document.createElement("div");
-      panel.className = "events-panel active";
+      panel.className = "about-panel active";
       panel.innerHTML = `
-        <h3>All Events</h3>
-        <div class="event-cards overlay-cards" id="overlayCards"></div>
-        <button class="close-btn" id="closeEvents">Close</button>`;
+        <button class="close-btn about-close" id="closeAbout" title="Close">✕</button>
+        <div class="about-inner">
+          <h3>Be At The Top Of Your Game</h3>
+          <div class="about-content">
+            <p>QNA International LLC is a leading global business to business event organizer, continuously innovating knowledge and events business since 2004. We create our events based on market intelligence and industry connections and deliver the best in-class content. We give access to practical case studies while embracing external trends and deliver wow events globally. All this to ‘Be at the Top of your Game’.</p>
+            <p>Having delivered successful large scale events across four continents in such a short span of time has earned us a repute globally. Our diverse portfolio of events has something unique for each client to choose from, connecting business minds globally with a intention of business growth is our main goal. QnA International is an industry expert and leader in the field of B2B Events, Summits, Conferences & Trainings. Our passion, positivity and dynamic approach, are the key factors which have contributed to QnA's recognition & growth since its inception. As the indisputable market pioneer, QnA International is always thinking out of the box and creating something unique for each and every partner.</p>
+            <p>Our young, dynamic multicultural team is the force behind our success and continues to create new milestones through this journey. QnA International's combined experience of more than 20 years has helped in providing world-class, quality products for its clients. We are focused on delivering excellence in all our projects and have a strong dedication towards achieving the vision and goals of our clients.</p>
+            <p>With a growing portfolio of conferences, summits and trainings, ranging from Travel & Tourism to Destination Weddings, Trade Finance to Human Resource and Technology, QnA International caters to a wide range of industries, in correlation with the present and future demands of the global economy. We are driven by passion and a genuine commitment towards providing the highest standard of events while building strong, positive business relationships with our partners and clients. We believe in open communication and evolving with the market, to provide the best industry standard solutions.</p>
+            <p>An ever evolving and progressive company, QnA International prides itself in its multi-cultural work environment and philosophy that is strongly based on producing high caliber, unique projects. Transforming the way the events are perceived and created, QnA International delivers impactful experiences that are firmly grounded in its core values and ideologies.</p>
+          </div>
+        </div>`;
       document.body.appendChild(panel);
-      const overlayCards = panel.querySelector("#overlayCards");
-      events.forEach((evt, i) => {
-        const el = document.createElement("div");
-        el.className = "event-card";
-        el.innerHTML = `
-          <img src="${evt.imgDesktop}" alt="${evt.title}">
-          <div class="card-body">
-            <h4>${evt.title}</h4>
-            <p>${evt.date}</p>
-            <button class="view-btn" onclick="(function(){ document.querySelector('.events-panel').remove(); viewEvent(${i}); })()">View</button>
-          </div>`;
-        overlayCards.appendChild(el);
-      });
-      document.getElementById("closeEvents").onclick = () => panel.remove();
+      document.getElementById("closeAbout").onclick = () => panel.remove();
     } else {
       panel.classList.toggle("active");
       if (!panel.classList.contains("active")) panel.remove();
     }
   });
+}
+
+/* -------------- THEME (light/dark) --------------
+   Light mode swaps header logo and adjusts Website button styles for readability.
+*/
+function attachThemeToggle() {
+  const t = document.getElementById("themeToggle");
+  const body = document.body;
+  const siteLogo = document.getElementById("siteLogo");
+  t.onclick = () => {
+    const isLight = body.classList.toggle("light-mode");
+    t.textContent = isLight ? "☀️" : "🌙";
+    // swap page header logo (dummy light logo)
+    siteLogo.src = isLight ? "assets/logo-light.png" : "assets/logo.png";
+
+    // update carousel logo for current event immediately
+    setEvent(currentIndex);
+
+    // rebuild cards to ensure colors and sizes adapt to theme
+    buildAllEvents();
+  };
 }

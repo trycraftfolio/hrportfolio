@@ -15,68 +15,82 @@
 
   <!-- HEADER -->
   <header>
-    <img src="assets/logo.png" alt="Logo" class="site-logo" />
-    <h1 class="site-title">HR PORTFOLIO 2026</h1>
-    <button id="allEventsBtn" class="all-events-btn">All Events</button>
+    <img id="siteLogo" src="assets/logo.png" alt="Logo" class="site-logo" />
+    <!--<h1 class="site-title">HR PORTFOLIO 2026</h1>-->
+
+    <div class="header-controls">
+      <button id="aboutBtn" class="all-events-btn" title="About Us">About Us</button>
+      <button id="themeToggle" class="theme-toggle" title="Toggle light / dark mode">🌙</button>
+    </div>
   </header>
 
   <!-- 1️⃣ ALL EVENTS PORTFOLIO SECTION -->
   <section id="portfolioSection" class="portfolio-section">
-    <h2 class="portfolio-heading">All Events</h2>
-    <div id="eventCards" class="event-cards"></div>
+    <h2 class="portfolio-heading">HR PORTFOLIO 2026</h2>
+    <div id="eventCards" class="event-cards" role="list"></div>
   </section>
 
   <!-- 2️⃣ SPONSORSHIP / MIDDLE CONTENT SECTION -->
   <section id="sponsorSection" class="sponsor-section">
     <div class="container-two-col">
-      <div class="left">
-        <h2 class="sponsor-heading">The Value of Sponsoring QnA International's Exclusive Events</h2>
+      <div class="top-row">
+        <div class="left-top">
+          <h2 class="sponsor-heading">The Value of Sponsoring QnA International's Exclusive Events</h2>
 
-        <p class="lead-paragraph">
-          <strong>Marketing ROI Analysis:</strong> When evaluating marketing channels, we understand your decision comes down to Return on Investment. Our curated, by-invitation events are engineered to deliver a superior ROI by maximizing efficiency and impact.
-        </p>
+          <p class="lead-paragraph">
+            <strong>Marketing ROI Analysis:</strong> When evaluating marketing channels, we understand your decision comes down to Return on Investment. Our curated, by-invitation events are engineered to deliver a superior ROI by maximizing efficiency and impact.
+          </p>
 
-        <h3 class="subheading small">Here's how that translates into measurable benefits for your bottom line:</h3>
+          <h3 class="subheading small">Here's how that translates into measurable benefits for your bottom line:</h3>
+        </div>
 
-        <div class="benefit-cards">
-          <!-- 5 repeated boxes -->
+        <div class="right-top">
+          <div class="image-placeholder">
+            <img src="assets/a.jpg" alt="Image description" style="width:100%; height:auto; border-radius:12px;" />
+  </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="center-row">
+        <div class="benefit-cards" id="benefitCards1" aria-label="Benefits (section 2)">
           <div class="benefit-card">
-            <h4>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h4>
+            <h3>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h3><br>
             <ul>
-              <li>• The Mass Event Problem: At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
-              <li>• The QnA Solution: Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
+              <li style="text-align: justify;"><strong>• The Mass Event Problem: </strong>At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
+              <li><strong>• The QnA Solution: </strong>Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
             </ul>
           </div>
 
           <div class="benefit-card">
-            <h4>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h4>
+             <h3>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h3><br>
             <ul>
-              <li>• The Mass Event Problem: At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
-              <li>• The QnA Solution: Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
+              <li style="text-align: justify;"><strong>• The Mass Event Problem: </strong>At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
+              <li><strong>• The QnA Solution: </strong>Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
             </ul>
           </div>
 
           <div class="benefit-card">
-            <h4>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h4>
+            <h3>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h3><br>
             <ul>
-              <li>• The Mass Event Problem: At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
-              <li>• The QnA Solution: Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
+              <li style="text-align: justify;"><strong>• The Mass Event Problem: </strong>At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
+              <li><strong>• The QnA Solution: </strong>Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
             </ul>
           </div>
 
           <div class="benefit-card">
-            <h4>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h4>
+             <h3>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h3><br>
             <ul>
-              <li>• The Mass Event Problem: At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
-              <li>• The QnA Solution: Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
+              <li style="text-align: justify;"><strong>• The Mass Event Problem: </strong>At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
+              <li><strong>• The QnA Solution: </strong>Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
             </ul>
           </div>
 
           <div class="benefit-card">
-            <h4>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h4>
+            <h3>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h3><br>
             <ul>
-              <li>• The Mass Event Problem: At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
-              <li>• The QnA Solution: Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
+              <li style="text-align: justify;"><strong>• The Mass Event Problem: </strong>At a large trade show with 3,000+ attendees, you may pay for 100 leads, but only 10 are bona fide decision-makers. Your effective CPQL is 10x higher than it appears.</li>
+              <li><strong>• The QnA Solution: </strong>Our events are pre-qualified. With an audience consisting entirely of VPs, CHROs, and C-level executives, nearly every conversation is with a high-value target. This precision targeting slashes your CPQL, ensuring your budget is spent on conversations that can close, not just contacts.</li>
             </ul>
           </div>
         </div>
@@ -94,84 +108,60 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Attendees</td>
-                  <td>~200 (pre-qualified)</td>
-                  <td class="wide-col">Highly targeted: proportionally more decision-makers per 100 attendees vs mass shows</td>
-                </tr>
-                <tr>
-                  <td>Qualified Leads</td>
-                  <td>~40–60</td>
-                  <td class="wide-col">Higher conversion potential due to seniority & invite-only audience</td>
-                </tr>
-                <tr>
-                  <td>CPQL (example)</td>
-                  <td>$300–$700</td>
-                  <td class="wide-col">Effective CPQL dramatically lower than mass events where CPQL is inflated by low-quality leads</td>
-                </tr>
-                <tr>
-                  <td>Avg Deal Size</td>
-                  <td>$50K–$250K</td>
-                  <td class="wide-col">Conversations are with budget-holders and decision-makers — pipeline velocity increases</td>
-                </tr>
-                <tr>
-                  <td>Close Rate</td>
-                  <td>5%–12%</td>
-                  <td class="wide-col">Higher close rates because conversations start at a senior level</td>
-                </tr>
-                <tr>
-                  <td>ROI Multiplier</td>
-                  <td>3x–8x (varies by product)</td>
-                  <td class="wide-col">Measured over 12–18 months — pipeline acceleration reduces sales cycle</td>
-                </tr>
+                <tr><td>Attendees</td><td>~200 (pre-qualified)</td><td class="wide-col">Highly targeted: proportionally more decision-makers per 100 attendees vs mass shows</td></tr>
+                <tr><td>Qualified Leads</td><td>~40–60</td><td class="wide-col">Higher conversion potential due to seniority & invite-only audience</td></tr>
+                <tr><td>CPQL (example)</td><td>$300–$700</td><td class="wide-col">Effective CPQL dramatically lower than mass events where CPQL is inflated by low-quality leads</td></tr>
+                <tr><td>Avg Deal Size</td><td>$50K–$250K</td><td class="wide-col">Conversations are with budget-holders and decision-makers — pipeline velocity increases</td></tr>
+                <tr><td>Close Rate</td><td>5%–12%</td><td class="wide-col">Higher close rates because conversations start at a senior level</td></tr>
+                <tr><td>ROI Multiplier</td><td>3x–8x (varies by product)</td><td class="wide-col">Measured over 12–18 months — pipeline acceleration reduces sales cycle</td></tr>
               </tbody>
             </table>
           </div>
 
-          <p class="conclusion">
-            In essence, you are not just buying access to an audience; you are investing in a highly efficient pipeline acceleration tool.
-          </p>
-        </div>
-      </div>
-
-      <div class="right">
-        <div class="image-placeholder">
-          <span>Image placeholder</span>
-          <!-- You can replace this with <img src="..." alt="..."> later -->
+          <p class="conclusion">In essence, you are not just buying access to an audience; you are investing in a highly efficient pipeline acceleration tool.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3️⃣ DUPLICATE SECTION 2 (placeholder, no table) -->
+  <!-- 3️⃣ DUPLICATE SECTION 2 (no table, no horizontal scroll) -->
   <section id="sponsorSection2" class="sponsor-section sponsor-section-duplicate">
     <div class="container-two-col">
-      <div class="left">
-        <h2 class="sponsor-heading">The Value of Sponsoring QnA International's Exclusive Events</h2>
-        <p class="lead-paragraph">
-          Placeholder: I will provide content later. This section mirrors Section 2 but without the unit-economics table.
-        </p>
-        <div class="benefit-cards short">
-          <div class="benefit-card">
-            <h4>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h4>
-            <ul>
-              <li>• The Mass Event Problem: Example text here.</li>
-              <li>• The QnA Solution: Example text here.</li>
-            </ul>
-          </div>
-          <div class="benefit-card">
-            <h4>Dramatically Lower Cost-Per-Qualified-Lead (CPQL)</h4>
-            <ul>
-              <li>• The Mass Event Problem: Example text here.</li>
-              <li>• The QnA Solution: Example text here.</li>
-            </ul>
+      <div class="top-row">
+        <div class="left-top">
+          <h2 class="sponsor-heading">The Value of Sponsoring QnA International's Exclusive Events</h2>
+          <p class="lead-paragraph">Placeholder: This section mirrors Section 2 but without the unit-economics table.</p>
+        </div>
+
+        <div class="right-top">
+          <div class="image-placeholder">
+            <span>Image placeholder</span>
           </div>
         </div>
       </div>
 
-      <div class="right">
-        <div class="image-placeholder">
-          <span>Image placeholder</span>
+      <div class="center-row">
+        <div class="benefit-cards no-scroll" id="benefitCards2" aria-label="Benefits (section 3)">
+          <div class="benefit-card">
+            <h4>Heading A</h4>
+            <ul><li>• Point 1</li><li>• Point 2</li></ul>
+          </div>
+          <div class="benefit-card">
+            <h4>Heading B</h4>
+            <ul><li>• Point 1</li><li>• Point 2</li></ul>
+          </div>
+          <div class="benefit-card">
+            <h4>Heading C</h4>
+            <ul><li>• Point 1</li><li>• Point 2</li></ul>
+          </div>
+          <div class="benefit-card">
+            <h4>Heading D</h4>
+            <ul><li>• Point 1</li><li>• Point 2</li></ul>
+          </div>
+          <div class="benefit-card">
+            <h4>Heading E</h4>
+            <ul><li>• Point 1</li><li>• Point 2</li></ul>
+          </div>
         </div>
       </div>
     </div>
